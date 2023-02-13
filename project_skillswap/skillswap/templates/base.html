@@ -1,0 +1,71 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% load static %}
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <!--  mystyle  -->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+        {% block head %}{% endblock %}
+        <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <nav id="global_navi">
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li class="current">
+                        <a href="{% url 'skillswap:course-selection' %}">
+                            <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="current">
+                        <a href="{% url 'skillswap:index' %}">
+                            <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+                    <form class="headerform" action="{% url 'skillswap:course-selection' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="search" name="q" placeholder="検索ワード">
+                        <button type="submit">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </form>
+                    
+                    {% if user.is_authenticated %}
+                    <a class="infomation" href="{% url 'skillswap:request-received' %}">
+                        <img src="{% static 'assets/news.png' %}" alt="news" width="37" height="37">
+                    </a>
+                    {% endif %}
+
+                    <select class="select1" name="sampledrop" onChange="location.href=value;">
+                        <img src="sample.png" alt="home" width="135" height="55">
+                        <option>--選択--</option>
+                        <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
+                        {% if user.is_authenticated %}
+                        <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
+                        <option value="{% url 'skillswap:search_user' %}">チャット</option>
+                        <option value="{% url 'account_logout' %}">ログアウト</option>
+                        {% else %}
+                        <option value="{% url 'account_login' %}">ログイン</option>
+                        {% endif %}
+                    </select>
+                </ul>
+            </nav>
+            {% block header %}{% endblock %}
+        </header>
+
+        {% block contents %}{% endblock %}
+
+        <footer>
+            <small>&copy; 2022 SKILLSWAP</small>
+        </footer>
+    </body>
+</html>

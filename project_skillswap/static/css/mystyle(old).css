@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+/*「#」から始まるのはID、「.」から始まるのはクラス*/
+body, #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: white;
+    /*background-color: rgb(244, 46, 46);*/
+    margin: 0;
+}
+
+/*ヘッダー調整*/
+header {
+  width: 100%;
+  padding: 0px 0px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgb(254, 255, 255);
+  position:fixed;
+  border-bottom: solid 2.5px #0000FF;
+  z-index: 5;
+}
+
+/*かつて表示されていたタイトル。消していい*/
+/*header .headline{
+  font-size: 3px;
+  font-size: 32px;
+}*/
+
+/* nav全体 */
+#global_navi ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* ロゴ */
+#global_navi ul li {
+  width: 0px;
+  float: left;
+  margin-right: 0;
+  text-align: center;
+}
+/*ヘッダー左上の画像位置調整(非推奨)*/
+img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* フォーム全体(非推奨) */
+form{
+  margin: 0px;
+}
+/*formで囲われた検索ボックス達の無駄な高さを無くす*/
+.headerform{
+  height: 0px;
+}
+
+/*検索ボックスのマージン、文字を真ん中表示*/
+header input {
+  margin: 0px auto;
+  text-align: center;
+}
+/*ヘッダー検索関連の位置最終調整*/
+header input{
+  position: absolute;
+  top: 25%;
+  left: 42%
+}
+header button{
+  position: absolute;
+  top: 25.5%;
+  left: 53.8%;
+}
+/* ヘッダーの残り香 */
+/*
+header input{
+  position: relative;
+  left: 50px;
+}
+header button{
+  position: relative;
+  left: 50px;
+}
+*/
+
+/*ネットから引っ張って来た検索ボックスとボタン。URLは見つけられないかもごめん*/
+search-box input[type="text"] {
+  flex-grow: 1;
+  padding: 0.7px 0px 0.7px 800px;
+  border: 1px solid #333947;
+  border-radius: 1.5rem 0 0 1.5rem;
+  left: 50px;
+  position: relative;
+}
+search-box button {
+  cursor: pointer;
+  padding: .8px .9px .8px .8px;
+  border-radius: 0 1.5rem 1.5rem 0;
+  border: none;
+  background-color: #333947;
+  color: #fff;
+  font-size: .75rem;
+  position: relative;
+  left: 50px;
+}
+search-box input:focus {
+  outline: 0;
+  border: 1px solid #4ab6f6;
+}
+search-box button:hover {
+  color: #4ab6f6;
+}
+
+/*ヘッダー鈴アイコンの調整*/
+.infomation{
+  position: absolute;
+  left:85%;
+  top: 47%;
+}
+
+/* 鈴の周りが青くなる */
+/*.infomation img{
+  border: solid 2.5px #0000FF;
+}*/
+
+/* 画像付きセレクトボックス */
+/*#global_navi ul select {
+  width: 100px;
+  float: right;
+  margin-right: 0;
+  text-align: right;
+}*/
+
+/*右上の画像付きセレクトボックス。まだ連動して画像は変えれない*/
+.select1{
+  background-image:url("/static/img/sample.png");
+  background-repeat: no-repeat;
+  background-position:50% 0%;
+  left: 650px;
+  position: relative;
+  text-indent: 100%;
+  padding: 15px 0;
+  border: 0 0 0 0;
+  position: relative;
+  height: 30;
+  border: #fff;
+  cursor : pointer;
+}
+/*
+.select1{
+  transform: translateY(0%);
+  top: 50%;
+  height: 55px;
+}
+*/
+
+/*チェックボックス本体の高さ*/
+.select1{
+  transform: translateY(0%);
+  top: 50%;
+  height: 55px;border
+}
+
+/*チェックボックスの中身の文字スタイル*/
+option{
+  text-indent: 100%;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+}
+
+/*他のチェックボックスにも画像が適用されてしまうのでコメント化している*/
+/*a:hover img { opacity: 0.7; }
+select:hover png { opacity: 0.7; }*/
+
+/* 共通 */
+/*様々なボタンの基本CSS。1つのHTMLに二つ以上ボタンがあるときは.btn1や.btn2に変わる*/
+.btn{
+  /*width:80px;*/
+  width:100px;
+  height:35px;
+  background:rgb(0,206,209);
+  border-radius:35px;
+  cursor : pointer;
+  margin-top: 150px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+}
+/*汎用ボタン位置調整(下に下げる)*/
+/*.btn{
+  margin-top: 150px;
+}*/
+
+/*クラスのないすべてのdivに適用。左から順に「上、右、下、左」の時計回り*/
+div{
+  padding: 40px 0px 25px 0px;
+}
+/*横線の調整。多分消していい*/
+hr {
+  border-bottom: 15px;
+  border-top: 2px solid #0000FF;
+}
+
+/*クラスのない(クラスが有っても)すべてのpタグに適用。文字の見た目を変えるのと中央揃え*/
+p{
+  text-align: center;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+}
+/*aタグの下線を削除*/
+a{
+  text-decoration: none;
+  color: black;
+}
+/*今h1は使っていない*/
+/*h1{
+  text-align: center;
+}*/
+
+
+/* ここからマイページ */
+/*マイページ上部情報群の右の空白*/
+.daily{
+  margin-right: 100px;
+}
+/*マイページ上部の情報群を枠線で囲う。位置調整*/
+.info{
+  border: 1px solid black;
+  margin: 0px 0px 0px 300px;
+  padding: 0px 0px 0px 0px;
+}
+/*マイページ上部、ユーザー情報を横並びにした時の左右の余白*/
+/* 名前 */
+.cl1{
+  position: relative;
+}
+/* 性別 */
+.cl2{
+  position: relative;
+  top: 0px;
+}
+
+/*プロフィール文章の位置*/
+.profile{
+      position: absolute;
+      top:33%;
+      left:18.5%;
+      padding:25px;
+}
+
+/*講座選択関連のクラス"superimg"
+  course_selection, course_detail, others_profile_text, others_profile_skillseat, others_profile_course*/
+.superimg{
+ position: static;
+ transform: translateY(0%);
+}
+
+/*スキルシート作成確認画面の余白*/
+.form-group{
+  padding: 15px;
+}
+/* ここからprivate_diary */
+/* divにあった */
+.row{
+/*padding: 20px;*/
+  padding: 10px 15px;
+}
+/*新規登録やログイン等の画面の上幅。数値を大きくすると下に下がる(上の余白が大きくなる)*/
+.my-div-style{
+    padding: 0;
+}
+/*教科書と同じ文。横並びや行頭アイコンの削除*/
+/* 多分使ってない */
+.nav-list {
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+.nav-list-item {
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+/*フッター調整*/
+footer {
+    margin-top: auto;
+    text-align: center;
+    background-color: aquamarine;
+}
+
+
+/*マイページ編集等の位置。HTMLからは干渉出来ない。tdとかthとかもそう*/
+/* 多分forms.pyのところ */
+label{
+    display: inline-block;
+    text-align: right;
+    width: 150px;
+}
+ul {
+  list-style: none;
+}
+tbody{
+  border: solid;
+}
+.widgets{
+  border: solid;
+}
+/*.table{
+  width: 35%;
+  height: 40%;
+  border: 2px solid black;
+  margin: 25px;
+}
+/*textarea{
+  border: 2px solid black;
+  margin: 25px;
+}
+th{
+  border: 2px solid black;
+  margin: 25px;
+}
+td{
+  border: 2px solid black;
+  margin: 25px;
+}*/
+input{
+  border: 2px solid black
+}
+/* 青いボタン */
+.wbtn{
+  width:80px;
+  height:35px;
+  background:rgb(70,130,180);
+  border-radius:35px;
+  cursor : pointer;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  position: relative;
+  top: 80%;
+  left: 79.5%;
+  margin: 15px;
+}
+.wbtn2{
+  width:80px;
+  height:35px;
+  background:rgb(70,130,180);
+  border-radius:35px;
+  cursor : pointer;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 47%;
+}
+.otherimg{
+  position: relative;
+  top: 10%;
+}
+/* 星(岩崎) */
+.star5_rating{
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #CCCCCC; /* グレーカラー 自由に設定化 */
+    /*font-size: 30px; フォントサイズ 自由に設定化 */
+}
+
+.star5_rating:before, .star5_rating:after{
+    content: '★★★★★';
+}
+
+.star5_rating:after{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffcf32; /* イエローカラー 自由に設定化 */
+}
+
+.star5_rating[data-rate="5"]:after{ width: 100%; } /* 星5 */
+.star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5.0 */
+.star5_rating[data-rate="4.9"]:after{ width: 98%; } /* 星4.9 */
+.star5_rating[data-rate="4.8"]:after{ width: 96%; } /* 星4.8 */
+.star5_rating[data-rate="4.7"]:after{ width: 94%; } /* 星4.7 */
+.star5_rating[data-rate="4.6"]:after{ width: 92%; } /* 星4.6 */
+.star5_rating[data-rate="4.5"]:after{ width: 90%; } /* 星4.5 */
+.star5_rating[data-rate="4.4"]:after{ width: 88%; } /* 星4.4 */
+.star5_rating[data-rate="4.3"]:after{ width: 86%; } /* 星4.3 */
+.star5_rating[data-rate="4.2"]:after{ width: 84%; } /* 星4.2 */
+.star5_rating[data-rate="4.1"]:after{ width: 82%; } /* 星4.1 */
+.star5_rating[data-rate="4"]:after{ width: 80%; } /* 星4 */
+.star5_rating[data-rate="4.0"]:after{ width: 80%; } /* 星4.0 */
+.star5_rating[data-rate="3.9"]:after{ width: 78%; } /* 星3.9 */
+.star5_rating[data-rate="3.8"]:after{ width: 76%; } /* 星3.8 */
+.star5_rating[data-rate="3.7"]:after{ width: 74%; } /* 星3.7 */
+.star5_rating[data-rate="3.6"]:after{ width: 72%; } /* 星3.6 */
+.star5_rating[data-rate="3.5"]:after{ width: 70%; } /* 星3.5 */
+.star5_rating[data-rate="3.4"]:after{ width: 68%; } /* 星3.4 */
+.star5_rating[data-rate="3.3"]:after{ width: 66%; } /* 星3.3 */
+.star5_rating[data-rate="3.2"]:after{ width: 64%; } /* 星3.2 */
+.star5_rating[data-rate="3.1"]:after{ width: 62%; } /* 星3.1 */
+.star5_rating[data-rate="3"]:after{ width: 60%; } /* 星3 */
+.star5_rating[data-rate="3.0"]:after{ width: 60%; } /* 星3.0 */
+.star5_rating[data-rate="2.9"]:after{ width: 58%; } /* 星2.9 */
+.star5_rating[data-rate="2.8"]:after{ width: 56%; } /* 星2.8 */
+.star5_rating[data-rate="2.7"]:after{ width: 54%; } /* 星2.7 */
+.star5_rating[data-rate="2.6"]:after{ width: 52%; } /* 星2.6 */
+.star5_rating[data-rate="2.5"]:after{ width: 50%; } /* 星2.5 */
+.star5_rating[data-rate="2.4"]:after{ width: 48%; } /* 星2.4 */
+.star5_rating[data-rate="2.3"]:after{ width: 46%; } /* 星2.3 */
+.star5_rating[data-rate="2.2"]:after{ width: 44%; } /* 星2.2 */
+.star5_rating[data-rate="2.1"]:after{ width: 42%; } /* 星2.1 */
+.star5_rating[data-rate="2"]:after{ width: 40%; } /* 星2 */
+.star5_rating[data-rate="2.0"]:after{ width: 40%; } /* 星2.0 */
+.star5_rating[data-rate="1.9"]:after{ width: 38%; } /* 星1.9 */
+.star5_rating[data-rate="1.8"]:after{ width: 36%; } /* 星1.8 */
+.star5_rating[data-rate="1.7"]:after{ width: 34%; } /* 星1.7 */
+.star5_rating[data-rate="1.6"]:after{ width: 32%; } /* 星1.6 */
+.star5_rating[data-rate="1.5"]:after{ width: 30%; } /* 星1.5 */
+.star5_rating[data-rate="1.4"]:after{ width: 28%; } /* 星1.4 */
+.star5_rating[data-rate="1.3"]:after{ width: 26%; } /* 星1.3 */
+.star5_rating[data-rate="1.2"]:after{ width: 24%; } /* 星1.2 */
+.star5_rating[data-rate="1.1"]:after{ width: 22%; } /* 星1.1 */
+.star5_rating[data-rate="1"]:after{ width: 20%; } /* 星1 */
+.star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1.0 */
+.star5_rating[data-rate="0.9"]:after{ width: 18%; } /* 星0.9 */
+.star5_rating[data-rate="0.8"]:after{ width: 16%; } /* 星0.8 */
+.star5_rating[data-rate="0.7"]:after{ width: 14%; } /* 星0.7 */
+.star5_rating[data-rate="0.6"]:after{ width: 12%; } /* 星0.6 */
+.star5_rating[data-rate="0.5"]:after{ width: 10%; } /* 星0.5 */
+.star5_rating[data-rate="0.4"]:after{ width: 8%; } /* 星0.4 */
+.star5_rating[data-rate="0.3"]:after{ width: 6%; } /* 星0.3 */
+.star5_rating[data-rate="0.2"]:after{ width: 4%; } /* 星0.2 */
+.star5_rating[data-rate="0.1"]:after{ width: 2%; } /* 星0.1 */
+.star5_rating[data-rate="0.0"]:after{ width: 0%; } /* 星0 */
+
+/* 評価の数値spanの文字を小さく(岩崎) */
+.small-span{
+    font-size: 18px;
+}
+
+/* 画像のプレビュー */
+.previewimg{
+    position: static;
+    transform: translateY(0%);
+    width: 100px;
+}
+.other-info{
+  position: relative;
+  top: -150px;
+  border: 1px solid black;
+  margin: 0px 0px 0px 300px;
+  padding: 0px 0px 0px 0px;
+}
+.godimg{
+  position: relative;
+  top: 40px;
+  left: 60px;
+}
+.menu1{
+  position: relative;
+  top: -110px;
+  left: 5%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.menu2{
+  position: relative;
+  top: -110px;
+  left: 8%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.menu3{
+  position: relative;
+  top: -110px;
+  left: 13%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.menu4{
+  position: relative;
+  top: -110px;
+  left: 18%;
+  font-size: 150%;
+  width: 8000px;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+  border-bottom:2px solid;
+  padding-bottom: 10px;
+}
+.cl2{
+  position: absolute;
+  top: 22%;
+  right: 57%;
+}
+.cl3{
+  position: absolute;
+  top: 22%;
+  right: 35%;
+}
+.cl22{
+  position: absolute;
+  top: 58%;
+  left: 60%;
+}
+.cl33{
+  position: absolute;
+  top: 58%;
+  right: 45%;
+}
+/* 上書きされてるから使われてない */
+.other-text{
+  position: relative;
+  top: -150px;
+}

@@ -1,0 +1,147 @@
+{% extends 'mypage.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | お気に入りの講座{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<!--<style>-->
+<!--    table{-->
+<!--      left:20%;-->
+<!--    }-->
+<!--</style>-->
+<style>
+    .btn1{
+      width:80px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+    .a3{
+      position: relative;
+      top: -50px;
+      left: 80%;
+    }
+    .img1{
+      width: 170px;
+      height: 170px;
+      position: absolute;
+      top:22.5%;
+      left:4%;
+      z-index: -1;
+    }
+    .myimg{
+      left:25%;
+    }
+    .choice{
+        font-family: cursive, 'Noto Sans JP', sans-serif;
+        margin: 0px 0px 0px 60px;
+    }
+    .choice1{
+       margin: 0px 0px 60px 0px;
+    }
+    table{
+      position: absolute;
+      left:0%;
+    }
+    .btn2{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      margin-left: 1200px;
+      position: absolute;
+      top:80%;
+    }
+    .wbtn{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      position: relative;
+      top: 80%;
+      left: 79.5%;
+      margin: 15px;
+    }
+    .myinfo{
+      padding: 0px;
+    }
+    th{
+      width:  450px;              /* 幅指定 */
+      height: 80px;
+      font-size: 20px;
+    }
+    td{
+      /* width:  400px;              幅指定 */
+      height: 169px;
+      font-size: 20px;
+      position: sticky;
+    }
+    .container{
+      padding: 40px 0px 0px 0px;
+    }
+    .wbtn2{
+      width:80px;
+      height:35px;
+      background:rgb(70,130,180);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      position: absolute;
+      top: 50%;
+      left: 47%;
+    }
+    .myinfo{
+      position: fixed;
+      top: 40%;
+      left: 30%;
+    }
+    .myinfo{
+      height: 344px;
+      width: 700px;
+      overflow-y: scroll;
+    }
+    table{
+      height: 100px;
+    }
+    .superform2{
+      width: 100px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="myinfo">
+
+    {% if favorite_list %}
+    <table border="1">
+        {% for favorite in favorite_list %}
+        <tr>
+            <td>
+            {% if favorite.course_id.course_img %}
+            <img class="superimg" src="{{ favorite.course_id.course_img.url }}" width="120" height="120"/>
+            {% else %}
+            <img class="superimg" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
+            {% endif %}
+            </td>
+            <th>{{ favorite.course_id.title }}</th>
+            <td><a href="{% url 'skillswap:favorite' favorite.course_id.pk %}"><button class="superform2">お気に入り解除</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>お気に入りに追加した講座はありません。</p>
+    {% endif %}
+</div>
+{% endblock %}

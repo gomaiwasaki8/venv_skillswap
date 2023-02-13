@@ -1,0 +1,81 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'others_profile.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 相手のレビュー{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .menu4{
+      color: blue;
+    }
+    .table{
+      position: fixed;
+      top: 50%;
+      left:25%;
+      height: 180px;
+    }
+    .table{
+      height: 240px;
+      overflow-y: scroll;
+    }
+    table tr td:nth-of-type(1){
+       width: 150px;
+    }
+    table tr td:nth-of-type(2){
+       width: 100px;
+    }
+    table tr td:nth-of-type(3){
+       width:550px;
+    }
+    div .table{
+      padding: 0px;
+    }
+    th{
+      width: 120px;
+    }
+    .btn{
+      position: absolute;
+      top: 60%;
+      left: 10%;
+      /*width:80px;*/
+      width:100px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="table">
+        <table border="1">
+            {% for evaluation in evaluation_list %}
+            <tr>
+                <td>
+                    {% if evaluation.user1_id.skillseat.user_img %}
+                    <img class="superimg" src="{{ evaluation.user1_id.skillseat.user_img.url }}" width="170" height="170"/>
+                    {% else %}
+                    <img class="superimg" src="{% static 'assets/sample.png' %}" width="170" height="170"/>
+                    {% endif %}
+                </td>
+                <td>
+                    <span class="star5_rating" data-rate="{{ evaluation.evaluation_num }}"></span>
+                    <span class="small-span">星{{ evaluation.evaluation_num }}</span>
+                </td>
+                <td>{{ evaluation.evaluation_text }}</td>
+            </tr>
+            {% empty %}
+            <p>レビューがありません。</p>
+            {% endfor %}
+        </table>
+    </div>
+  <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
+</div>
+{% endblock %}

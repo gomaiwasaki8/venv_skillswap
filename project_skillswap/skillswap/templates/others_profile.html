@@ -1,0 +1,103 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% load static %}
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+        {% block head %}{% endblock %}
+        <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <nav id="global_navi">
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li class="current">
+                        <a href="{% url 'skillswap:course-selection' %}">
+                            <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="current">
+                        <a href="{% url 'skillswap:index' %}">
+                            <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <form class="headerform" action="{% url 'skillswap:course-selection' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="search" name="q" placeholder="検索ワード">
+                        <button type="submit">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </form>
+
+                    {% if user.is_authenticated %}
+                    <a class="infomation" href="{% url 'skillswap:request-received' %}">
+                        <img src="{% static 'assets/news.png' %}" alt="news" width="37" height="37">
+                    </a>
+                    {% endif %}
+
+                    <select class="select1" name="sampledrop" onChange="location.href=value;">
+                        <img src="sample.png" alt="home" width="135" height="55">
+                        <option>--選択--</option>
+                        <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
+                        {% if user.is_authenticated %}
+                        <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
+                        <option value="{% url 'skillswap:search_user' %}">チャット</option>
+                        <option value="{% url 'account_logout' %}">ログアウト</option>
+                        {% else %}
+                        <option value="{% url 'account_login' %}">ログイン</option>
+                        {% endif %}
+                    </select>
+                </ul>
+            </nav>
+            {% block header %}{% endblock %}
+        </header>
+
+        <h1>{% block contents-title %}{% endblock %}</h1>
+        <div class="container" xmlns="http://www.w3.org/1999/html">
+            <div class="daily">
+                {% for skillseat in skillseat_list %}
+                {% if skillseat.user_img %}
+                <img class="godimg" src="{{ skillseat.user_img.url }}" width="120" height="120"/>
+                {% else %}
+                <img class="godimg" src="{% static 'assets/sample.png' %}" width="120" height="120"/>
+                {% endif %}
+
+                <div class="other-info">
+                    <h2>
+                        <span class="cl11">名前：{{ skillseat.user_name }}</span>
+                        <span class="cl22">性別：{{ skillseat.gender }}</span>
+                        <span class="cl33">生年月日：{{ skillseat.birthday }}</span>
+                    </h2>
+                    {% if skillseat.user_evaluation %}
+                    <h2>評価
+                        <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
+                        <span class="small-span">星{{ skillseat.user_evaluation }}</span>
+                    </h2>
+                    {% else %}
+                    <h2>評価はありません。</h2>
+                    {% endif %}
+                </div>
+
+
+                <a class="menu1" href="{% url 'skillswap:others-profile-text' skillseat.pk %}">プロフィール</a>
+                <a class="menu2" href="{% url 'skillswap:others-profile-course' skillseat.user_id_id %}">講座</a>
+                <a class="menu3" href="{% url 'skillswap:others-profile-skillseat' skillseat.user_id_id %}">スキルシート</a>
+                <a class="menu4" href="{% url 'skillswap:others-profile-review' skillseat.user_id_id %}">レビュー</a>
+                {% endfor %}
+            </div>
+            {% block contents %}{% endblock %}
+        </div>
+
+        <footer>
+            <small>&copy; 2022 SKILLSWAP</small>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'base.html' %}
+
+{% block title %}SKILLSWAP | ログイン {% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block head %}
+<style>
+    #id_remember{
+      white-space: nowrap;
+      left: 25px;
+      position: relative;
+    }
+    label{
+      white-space: nowrap;
+    }
+</style>
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div align="center">
+            <h1>ログイン</h1>
+            <form method="post" action="{% url 'account_login' %}">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <button class="btn btn-primary" type="submit">サインイン</button>
+                <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!-- 作成者：岩崎・古越 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 運営からのお知らせ一覧{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div>
+            <h1>管理者</h1>
+
+            <a href="{% url 'skillswap:user-list' %}"><button>登録ユーザ情報一覧</button></a>
+            <a href="{% url 'skillswap:inquiry-list' %}"><button>受信済みお問い合わせ一覧</button></a>
+
+            <a href="{% url 'skillswap:news-create' %}"><button>お知らせ作成</button></a>
+
+            {% for object in object_list %}
+            <table border="1">
+                <tr>
+                    <td>お知らせ内容</td><td>{{ object.news_detail }}</td>
+                </tr>
+                <tr>
+                    <td>作成日時</td><td>{{ object.created_at }}</td>
+                </tr>
+                <tr>
+                    <td>ユーザ</td>
+                    <td>
+                        {% if object.user_id_id %}
+                            {{ object.user_id_id }}
+                        {% else %}
+                            全員
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="{% url 'skillswap:news-update' object.pk %}"><button>編集</button></a>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

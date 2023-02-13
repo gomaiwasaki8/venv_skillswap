@@ -1,0 +1,119 @@
+{% extends 'mypage.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | プロフィール{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<!--<style>-->
+<!--    .btn1{-->
+<!--      width:80px;-->
+<!--      height:35px;-->
+<!--      background:rgb(70,130,180);-->
+<!--      border-radius:35px;-->
+<!--      cursor : pointer;-->
+<!--      font-family: cursive, 'Noto Sans JP', sans-serif;-->
+<!--      margin-left: 900px;-->
+<!--    }-->
+<!--    .img1{-->
+<!--      position: absolute;-->
+<!--      top:19%;-->
+<!--      left:5%;-->
+<!--      z-index: -1;-->
+<!--    }-->
+<!--    .choice{-->
+<!--      font-family: cursive, 'Noto Sans JP', sans-serif;-->
+<!--       margin: 0px 0px 0px 60px;-->
+<!--    }-->
+<!--    .choice1{-->
+<!--       margin: 0px 0px 60px 0px;-->
+<!--    }-->
+<!--    table{-->
+<!--      position: absolute;-->
+<!--      top:38%;-->
+<!--      left:20%;-->
+<!--    }-->
+<!--    .btn2{-->
+<!--      width:80px;-->
+<!--      height:35px;-->
+<!--      background:rgb(70,130,180);-->
+<!--      border-radius:35px;-->
+<!--      cursor : pointer;-->
+<!--      font-family: cursive, 'Noto Sans JP', sans-serif;-->
+<!--      margin-left: 1200px;-->
+<!--      position: absolute;-->
+<!--      top:80%;-->
+<!--    }-->
+<!--</style>-->
+<style>
+     .btn1{
+      width:80px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+    .a3{
+      position: relative;
+      top: -50px;
+      left: 80%;
+    }
+    .img1{
+      width: 170px;
+      height: 170px;
+      position: absolute;
+      top:22.5%;
+      left:4%;
+      z-index: -1;
+    }
+    .choice{
+        font-family: cursive, 'Noto Sans JP', sans-serif;
+        margin: 0px 0px 0px 60px;
+    }
+    .choice1{
+       margin: 0px 0px 60px 0px;
+    }
+
+    .btn2{
+      width:80px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      position: absolute;
+      top: 400px;
+      left: 920px;
+    }
+    .profile p{
+      position: absolute;
+      left: 300px;
+      font-size: 18px;
+      width: 450px;
+      word-wrap: break-word;
+    }
+    .wbtn{
+      position: relative;
+      top: 80%;
+      left: 77.8%;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="profile">
+    {% if skillseat_list %}
+    <!--<p>プロフィール</p>-->
+    {% for skillseat in skillseat_list %}
+    <p>{{ skillseat.profile_text }}</p>
+    <a class="a4" href="{% url 'skillswap:profile-text-update' skillseat.pk %}"><button class="btn2">編集</button></a>
+    {% endfor %}
+    {% else %}
+    <p>プロフィールを作成してください。</p>
+    {% endif %}
+</div>
+{% endblock %}

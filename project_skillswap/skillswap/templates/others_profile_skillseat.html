@@ -1,0 +1,72 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'others_profile.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 相手のスキルシート{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .menu3{
+      color: blue;
+    }
+    .table{
+      position: fixed;
+      top: 50%;
+      left:30%;
+      height: 180px;
+    }
+    .table{
+      height: 240px;
+      overflow-y: scroll;
+    }
+    table tr td:nth-of-type(1){
+       width: 150px;
+    }
+    table tr td:nth-of-type(2){
+       width: 200px;
+    }
+    table tr td:nth-of-type(3){
+       width:550px;
+    }
+    div .table{
+      padding: 0px;
+    }
+    th{
+      width: 120px;
+    }
+    .btn{
+      position: absolute;
+      top: 60%;
+      left: 10%;
+      /*width:80px;*/
+      width:100px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="table">
+    <table border="1">
+    {% for language in language_list %}
+        <tr>
+            <th>{{ language.genre_1 }}</th>
+            <td>{{ language.genre_2 }}</td>
+            <th>{{ language.career }}</th>
+            <td>{{ language.language_detail }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    </div>
+  <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
+</div>
+{% endblock %}

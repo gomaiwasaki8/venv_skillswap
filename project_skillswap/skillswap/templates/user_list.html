@@ -1,0 +1,37 @@
+<!-- 作成者：岩崎・古越 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | ユーザ一覧{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div align="center">
+            <h1>管理者</h1>
+
+            <a href="{% url 'skillswap:inquiry-list' %}"><button>受信済みお問い合わせ一覧</button></a>
+            <a href="{% url 'skillswap:news-list' %}"><button>運営からのお知らせ一覧</button></a>
+
+            {% for skillseat in skillseat_list %}
+            <table>
+                <tr>
+                    <th>{{ skillseat.user_name }}</th>
+                    {% if skillseat.user_id.is_active == True %}
+                    <td><a href="{% url 'skillswap:suspension' skillseat.user_id_id %}"><button>アカウント停止</button></a></td>
+                    {% else %}
+                    <td><a href="{% url 'skillswap:restoration' skillseat.user_id_id %}"><button>アカウント復旧</button></a></td>
+                    {% endif %}
+                </tr>
+            </table>
+            {% endfor %}
+            </div>
+    </div>
+</div>
+{% endblock %}

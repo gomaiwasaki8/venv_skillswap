@@ -1,0 +1,90 @@
+<!-- 作成者：岩崎・古越 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | マイ講座作成{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  $('input[type=file]').after('<span></span>');
+
+  // アップロードするファイルを選択
+  $('input[type=file]').change(function() {
+    var file = $(this).prop('files')[0];
+
+    // 画像以外は処理を停止
+    if (! file.type.match('image.*')) {
+      // クリア
+      $(this).val('');
+      $('#pimg').html('');
+      return;
+    }
+
+    // 画像表示
+    var reader = new FileReader();
+    reader.onload = function() {
+      var img_src = $('<img>').attr({
+        src: reader.result,
+        class: 'previewimg',
+      });
+      $('#pimg').html(img_src);
+    }
+    reader.readAsDataURL(file);
+  });
+});
+</script>
+
+<style>
+p{
+  text-align:center;
+}
+h1{
+  text-align:left;
+  margin: 0;
+  padding: 0;
+  padding-left:100px;
+  padding-bottom:15px;
+  border-bottom:3px double blue;
+  width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.previewimg{
+  position: absolute;
+  top: 180px;
+  left: 300px;
+  width: 150px;
+  height: 150px;
+}
+.table{
+  position: relative;
+  top: 25px;
+}
+</style>
+
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div align="center">
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <h1>講座</h1>
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <button class="superbtn" type="submit">送信</button>
+            </form>
+            <a href="{% url 'skillswap:index' %}"><button class="superbtn">戻る</button></a>
+            <div id="pimg"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | スキルシート{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+  <style>
+    p{
+      text-align:center;
+    }
+    h1{
+      text-align:left;
+      margin: 0;
+      padding: 0;
+      padding-left:100px;
+      padding-bottom:15px;
+      border-bottom:3px double blue;
+      width: 1300px;
+	  margin-left: auto;
+	  margin-right: auto;
+    }
+    .table{
+      position: relative;
+      top: 25px;
+    }
+  </style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div align="center">
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <h1>スキルシート</h1>
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <button class="superbtn" type="submit">更新</button>
+            </form>
+            <a href="{% url 'skillswap:skillseat-browse' %}"><button class="superbtn">戻る</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

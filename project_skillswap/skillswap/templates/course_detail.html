@@ -1,0 +1,132 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 講座詳細{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .userimg{
+      position: relative;
+      top: -100px;
+      left: 75%;
+    }
+    .title{
+      position: relative;
+      top: -140px;
+      left: 20%;
+      font-size: 150%;
+      width: 450px;
+      word-wrap: break-word;
+    }
+    .btnc{
+       width:80px;
+       height:35px;
+       background:rgb(0,206,209);
+       border-radius:35px;
+       cursor : pointer;
+       font-family: cursive, 'Noto Sans JP', sans-serif;
+       position: relative;
+       top: 170px;
+       left: 400px;
+     }
+     .image{
+       position: relative;
+       top: 50px;
+       left: -390px;
+     }
+     .kouzaimg{
+       position: absolute;
+       top: 400px;
+       left: 275px;
+     }
+     .title{
+
+     }
+     .explanation{
+       position: absolute;
+       top: 40%;
+       left: 40%;
+       width: 300px;
+       word-wrap: break-word;
+     }
+     .username{
+       position: absolute;
+       top: 80px;
+       left: 1120px;
+       width: 250px;
+       word-wrap: break-word;
+     }
+     .text1{
+       position: relative;
+       top: 0px;
+       left: 0px;
+     }
+     .backbtn{
+       width:80px;
+       height:35px;
+       background:rgb(0,206,209);
+       border-radius:35px;
+       cursor : pointer;
+       font-family: cursive, 'Noto Sans JP', sans-serif;
+       position: absolute;
+       top: 85%;
+       left: 90%;
+     }
+     .container{
+       padding: 40px 0px 0px 0px;
+     }
+     .hyouka{
+       position: absolute;
+       top: 48%;
+       left: 77%;
+     }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<h1>講座詳細</h1>
+<div class="container">
+    <div>
+        <p class="image">　</p>
+        {% if object.course_img %}
+        <img class="kouzaimg" src="{{ object.course_img.url }}" width="200" height="200"/>
+        {% else %}
+        <img class="kouzaimg" src="{% static 'assets/sample.png' %}" width="200" height="200"/>
+        {% endif %}
+
+        {% if object %}
+        <p class="title">{{ object.title }}</p>
+        <p class="explanation">{{ object.detail }}</p>
+        <p><a href="{% url 'skillswap:request-application' object.pk %}"><button class="btnc" >依頼申請</button></a></p>
+        {% else %}
+        <p>まだ講座を作成していないユーザーです。</p>
+        {% endif %}
+
+        {% for skillseat in skillseat_list %}
+            <a href="{% url 'skillswap:others-profile-text' skillseat.pk %}">
+            {% if skillseat.user_img %}
+            <img class="userimg" src="{{ skillseat.user_img.url }}" width="180" height="180"/>
+            {% else %}
+            <img class="userimg" src="{% static 'assets/sample.png' %}" width="180" height="180"/>
+            {% endif %}
+            </a>
+            <p class="username">{{ skillseat.user_name }} さん</p>
+            {% if skillseat.user_evaluation %}
+            <p class="hyouka">
+            <span class="star5_rating" data-rate="{{ skillseat.user_evaluation }}"></span>
+            <span class="small-span">星{{ skillseat.user_evaluation }}</span>
+            </p>
+            {% else %}
+            <p class="text1">依頼取引を行ったことのないユーザーのため評価はありません。</p>
+            {% endif %}
+        {% endfor %}
+
+        <a href="{% url 'skillswap:course-selection' %}"><button class="backbtn">戻る</button></a>
+    </div>
+</div>
+{% endblock %}

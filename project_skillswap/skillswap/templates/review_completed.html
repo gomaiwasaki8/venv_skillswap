@@ -1,0 +1,23 @@
+<!-- 作成者：岩崎 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | レビュー{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div align="center">
+            <h1>取引が完了しました</h1>
+            <p>このたびはSKILLSWAPのご利用ありがとうございました</p>
+            <a href="{% url 'skillswap:course-selection' %}"><button class="wbtn2">戻る</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

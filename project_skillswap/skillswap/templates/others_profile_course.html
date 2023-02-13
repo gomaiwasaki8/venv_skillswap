@@ -1,0 +1,88 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'others_profile.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 相手の講座{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .menu2{
+      color: blue;
+    }
+    .superimg{
+      position: absolute;
+      top: 380px;
+      left: 210px;
+    }
+    .btn{
+      position: absolute;
+      top: 60%;
+      left: 10%;
+      /*width:80px;*/
+      width:100px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+    th{
+      height: 135px;
+      width: 180px;
+    }
+    table tr td:nth-of-type(1){
+       width: 650px;
+    }
+    table tr td:nth-of-type(3){
+       width: 30px;
+    }
+    table{
+      position: absolute;
+      top: 380px;
+      left: 350px;
+    }
+    .superform2{
+      width: 50px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    {% for course in course_list %}
+        <table border="1">
+            <tr>
+                <th>{{ course.title }}</th>
+                <td>{{ course.detail }}</td>
+                {% if course.course_img %}
+                <img class="superimg" src="{{ course.course_img.url }}" width="140" height="140"/>
+                {% else %}
+                <img class="superimg" src="{% static 'assets/sample.png' %}" width="140" height="140"/>
+                {% endif %}
+                <td><a href="{% url 'skillswap:request-application' course.pk %}"><button class="superform2" >依頼</button></a></td>
+                <td>
+
+                    <a href="{% url 'skillswap:favorite-profile' course.pk %}"><img class="sterimg" src="{% static 'assets/favo2.png' %}" alt="favorite" height ="30" width="30"></a>
+                    {% for favo in course.favorite_set.all %}
+                    {% if favo.user_id_id == user.id %}
+                    {% if course.pk == favo.course_id_id %}
+                    <a href="{% url 'skillswap:favorite-profile' course.pk %}"><img class="sterimg" src="{% static 'assets/favo.png' %}" alt="favorite" height ="30" width="30"></a>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                </td>
+
+            </tr>
+        </table>
+    {% endfor %}
+        <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
+    </div>
+</div>
+{% endblock %}

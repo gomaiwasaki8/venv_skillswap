@@ -1,0 +1,119 @@
+{% extends 'mypage.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | スキルシート{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .btn1{
+      width:80px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+    .a3{
+      position: relative;
+      top: -50px;
+      left: 80%;
+    }
+    /*後から追加*/
+    .img1{
+      width: 170px;
+      height: 170px;
+      position: absolute;
+      top:22.5%;
+      left:4%;
+      z-index: -1;
+    }
+    .choice{
+        position: relative;
+        font-family: cursive, 'Noto Sans JP', sans-serif;
+        margin: 0px 0px 0px 60px;
+        width: fit-content;
+    }
+    .choice1{
+       position: relative;
+       margin: 0px 0px 60px 0px;
+    }
+    .table{
+      position: fixed;
+      top: 44%;
+      left:20%;
+      height: 180px;
+    }
+    .btn2{
+      width:80px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      margin-left: 1200px;
+      position: absolute;
+      top:85%;
+    }
+    .table{
+      height: 240px;
+      width: 73.5%;
+      overflow-y: scroll;
+    }
+    table tr td:nth-of-type(1){
+       width: 150px;
+    }
+    table tr td:nth-of-type(2){
+       width: 200px;
+    }
+    table tr td:nth-of-type(3){
+       width:550px;
+    }
+    .skillbtn{
+      background-color: rgb(0,206,209);
+    }
+    .superform2{
+      width: 50px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+    div .table{
+      padding: 0px;
+    }
+    th{
+      width: 120px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="table">
+    {% if language_list %}
+    <table border="1">
+        <tr>
+            <th>ジャンル大</th>
+            <th>ジャンル小</th>
+            <th>経歴</th>
+            <th>詳細</th>
+        </tr>
+        {% for language in language_list %}
+        <tr>
+            <th>{{ language.genre_1 }}</th>
+            <td>{{ language.genre_2 }}</td>
+            <td>{{ language.career }}</td>
+            <td>{{ language.language_detail }}</td>
+            <td><a href="{% url 'skillswap:language-update' language.pk %}"><button class="superform2">編集</button></a></td>
+            <td><a class="superform2" href="{% url 'skillswap:language-delete' language.pk %}"><button class="superform2">削除</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>スキルシートを作成してください。</p>
+    {% endif %}
+    </div>
+    <a href="{% url 'skillswap:language-create' %}"><button class="btn2">追加</button></a>
+
+{% endblock %}

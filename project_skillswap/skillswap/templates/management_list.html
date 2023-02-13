@@ -1,0 +1,93 @@
+<!-- 作成者：岩崎・古越 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 運営からのお知らせ{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .superform2{
+      position: relative;
+      top: 10px;
+      left: 600px;
+      width: 130px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+    .mes{
+      position: relative;
+      top: -50%;
+      left: 55%;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      width: 200px;
+      word-wrap: break-word;
+    }
+    .iraininn{
+      position: relative;
+      top: -50%;
+      left: 55%;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      width: 200px;
+      word-wrap: break-word;
+    }
+    .superimg{
+      position: relative;
+      top: 35px;
+      left: 35%;
+    }
+    .irai{
+      position: relative;
+      top: -80px;
+      left: 620px;
+      width: 50px;
+      background-color: rgb(0,206,209);
+      padding: 1px;
+    }
+    .noirai{
+      position: relative;
+      top: -105px;
+      left: 710px;
+      width: 50px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+    .ul{
+      height: 300px;
+      width: 73.5%;
+      overflow-y: scroll;
+    }
+    .notext{
+      position: absolute;
+      left: 630px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+        <a href="{% url 'skillswap:request-received' %}"><button class="superform2">申し込まれた依頼</button></a>
+        <a href="{% url 'skillswap:management-list' %}"><button class="superform2">運営からのお知らせ</button></a>
+        <div>
+        {% for object in object_list %}
+        <table border="1">
+            <tr>
+                <td>お知らせ内容</td>
+                <td>{{ object.news_detail }}</td>
+            </tr>
+            <tr>
+                <td>受信日時</td>
+                <td>{{ object.created_at }}</td>
+            </tr>
+        </table>
+        {% empty %}
+        <p>お知らせはありません</p>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

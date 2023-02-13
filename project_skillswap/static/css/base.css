@@ -1,0 +1,149 @@
+/* 作成者：藤谷 */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+/*「#」から始まるのはID、「.」から始まるのはクラス*/
+body, #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/*ヘッダー調整*/
+header {
+  width: 100%;
+  padding: 0px 0px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgb(254, 255, 255);
+  position:fixed;
+  border-bottom: solid 2.5px #0000FF;
+  z-index: 5;
+}
+
+/*かつて表示されていたタイトル。消していい*/
+/*header .headline{
+  font-size: 3px;
+}*/
+
+/* nav全体 */
+#global_navi ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* ロゴ */
+#global_navi ul li {
+  width: 0px;
+  float: left;
+  margin-right: 0;
+  text-align: center;
+}
+/*ヘッダー左上の画像位置調整(非推奨)*/
+img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* フォーム全体(非推奨) */
+form{
+  margin: 0px;
+}
+/*formで囲われた検索ボックス達の無駄な高さを無くす*/
+.headerform{
+  height: 0px;
+}
+
+/*検索ボックスのマージン、文字を真ん中表示*/
+header input {
+  margin: 0px auto;
+  text-align: center;
+}
+/*ヘッダー検索関連の位置最終調整*/
+header input{
+  position: absolute;
+  top: 25%;
+  left: 42%
+}
+header button{
+  position: absolute;
+  top: 25.5%;
+  left: 53.8%;
+}
+
+/*ネットから引っ張って来た検索ボックスとボタン。URLは見つけられないかもごめん*/
+search-box input[type="text"] {
+  flex-grow: 1;
+  padding: 0.7px 0px 0.7px 800px;
+  border: 1px solid #333947;
+  border-radius: 1.5rem 0 0 1.5rem;
+  left: 50px;
+  position: relative;
+}
+search-box button {
+  cursor: pointer;
+  padding: .8px .9px .8px .8px;
+  border-radius: 0 1.5rem 1.5rem 0;
+  border: none;
+  background-color: #333947;
+  color: #fff;
+  font-size: .75rem;
+  position: relative;
+  left: 50px;
+}
+search-box input:focus {
+  outline: 0;
+  border: 1px solid #4ab6f6;
+}
+search-box button:hover {
+  color: #4ab6f6;
+}
+
+/*ヘッダー鈴アイコンの調整*/
+.infomation{
+  position: relative;
+  left:39.5%;
+  top: 1px;
+}
+
+/* 鈴の周りが青くなる */
+/*.infomation img{
+  border: solid 2.5px #0000FF;
+}*/
+
+/* 画像付きセレクトボックス */
+/*#global_navi ul select {
+  width: 100px;
+  float: right;
+  margin-right: 0;
+  text-align: right;
+}*/
+
+/*右上の画像付きセレクトボックス。まだ連動して画像は変えれない*/
+.select1{
+  background-image:url("/static/img/sample.png");
+  background-repeat: no-repeat;
+  background-position:50% 0%;
+  left: 650px;
+  position: relative;
+  text-indent: 100%;
+  padding: 15px 0;
+  border: 0 0 0 0;
+  position: relative;
+  height: 30;
+  border: #fff;
+  cursor : pointer;
+}
+
+/*チェックボックス本体の高さ*/
+.select1{
+  transform: translateY(0%);
+  top: 50%;
+  height: 55px;border
+}
+
+/*チェックボックスの中身の文字スタイル*/
+option{
+  text-indent: 100%;
+  font-family: cursive, 'Noto Sans JP', sans-serif;
+}

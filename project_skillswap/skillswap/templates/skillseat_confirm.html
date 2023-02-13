@@ -1,0 +1,37 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | スキルシート作成確認{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block header %}
+<style>
+    .form-group{
+       padding: 20px;
+       margin: 0 100px 0 0;
+    }
+<!--    label{-->
+
+<!--    }-->
+</style>
+{% endblock %}
+
+{% block contents %}
+<div class="container" align="center">
+    <a href="{% url 'skillswap:skillseat-input' %}" class="btn btn-primary btn-lg">戻る</a>
+    <hr>
+    <form action="{% url 'skillswap:skillseat-create' %}" method="POST">
+        {% for field in form %}
+        <div class="form-group">
+            {% if field.value %}
+                {{ field.value }}
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-lg">送信</button>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}

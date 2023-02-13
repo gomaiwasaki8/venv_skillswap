@@ -1,0 +1,29 @@
+<!-- 作成者：藤谷 -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}SKILLSWAP{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+    <div align="center">
+        <a href="{% url 'account_signup' %}"><button class="btn">新規登録</button></a>
+
+        <p>
+            SKILLSWAPでは、欲しい知識を持った相手から学ぶことができます。<br>
+            チャットによるサポートやレビュー機能により、<br>
+            安心してオンラインのレッスンを受けられます。<br>
+        </p>
+        <p>
+            オンラインによる受講のサポート、そしてお金のやり取りが一切発生しないため、<br>
+            気軽にプログラミング知識を学ぶことが出来ます。<br>
+        </p>
+        <p>
+            また、相手に教えることで自分自身の理解を深めることにもつながります。<br>
+            ご自身の得意なプログラミング言語や培ってきた知識を活かし、<br>
+            ぜひ知識を分け合ってみませんか。<br>
+        </p>
+    </div>
+{% endblock %}

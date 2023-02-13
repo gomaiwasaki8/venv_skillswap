@@ -1,0 +1,148 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>SKILLSWAP | チャット</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/chat_room.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+    <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+
+    <style>
+        .chat-input{
+            font-family: initial;
+            font-size: 12px;
+            line-height: initial;
+            padding: 1px 2px;
+        }
+    </style>
+
+</head>
+<body>
+<html>
+<header>
+<nav id="global_navi">
+    <ul>
+        {% if user.is_authenticated %}
+        <li class="current">
+            <a href="{% url 'skillswap:course-selection' %}">
+                <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+            </a>
+        </li>
+        {% else %}
+        <li class="current">
+            <a href="{% url 'skillswap:index' %}">
+                <img src="{% static 'assets/logo.png' %}" alt="home" width="135" height="56">
+            </a>
+        </li>
+        {% endif %}
+
+
+        <form class="headerform" action="{% url 'skillswap:course-selection' %}" method="GET">
+            {% csrf_token %}
+            <input type="search" name="q" class="chat-input" placeholder="検索ワード">
+            <button type="submit">
+                <i class="fas fa-search fa-fw"></i>
+            </button>
+        </form>
+
+        <a class="infomation" href="{% url 'skillswap:request-received' %}">
+            <img src="{% static 'assets/news.png' %}" alt="news" width="37" height="37">
+        </a>
+
+        <select class="select1" name="sampledrop" onChange="location.href=value;">
+            <img src="sample.png" alt="home" width="135" height="55">
+            <option>--選択--</option>
+            <option value="{% url 'skillswap:inquiry' %}">お問い合わせ</option>
+            {% if user.is_authenticated %}
+            <option value="{% url 'skillswap:skillseat-browse' %}">マイページ</option>
+            <option value="{% url 'skillswap:search_user' %}">チャット</option>
+            <option value="{% url 'account_logout' %}">ログアウト</option>
+            {% else %}
+            <option value="{% url 'account_login' %}">ログイン</option>
+            {% endif %}
+        </select>
+    </ul>
+</nav>
+</header>
+<body>
+<div class="container my-div-style-chat">
+{% block title%}{% endblock %}
+<div class="messaging my-div-style">
+      <div class="inbox_msg my-div-style">
+        <div class="inbox_people">
+          <div class="inbox_chat my-div-style">
+            {% if friends %}
+            {% for friend in friends %}
+            <a href="{% url 'skillswap:get_message' friend.friend.username %}">
+            <div class="chat_list my-div-style">
+              <div class="chat_people my-div-style">
+                <div class="chat_ib">
+                    <h5>{{ friend.friend.skillseat.user_name }}</h5>
+                    {% if friend.review_completed != True %}
+                    <a href="{% url 'skillswap:review' friend.pk %}"><button>取引終了</button></a>
+                    {% else %}
+                    <a href="{% url 'skillswap:review-update' friend.pk %}"><button>再レビュー</button></a>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+            </a>
+            {% endfor %}
+            </div>
+            {% else %}
+            <p>相手がいません。</p>
+            {% endif %}
+        </div>
+        {% block contents%}{% endblock %}
+      </div>
+<!--      <p class="text-center top_spac"> It is composed of Django + DRF + JavaScript.<a target="_blank" href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"></a></p>-->
+    </div></div>
+    </body>
+    </html>
+<script type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+<!-- Ajax Post送信のCSRF対策-->    
+<script type="text/javascript">
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });   
+</script>
+
+</body>
+</html>

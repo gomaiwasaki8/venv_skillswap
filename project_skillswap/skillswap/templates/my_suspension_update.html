@@ -1,0 +1,26 @@
+<!-- 作成者：岩崎 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 退会確認{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div align="center">
+            <p>本当に退会しますか？</p>
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <button class="superbtn" type="submit">停止</button>
+            </form>
+            <a href="{% url 'skillswap:skillseat-browse' %}"><button class="superbtn">戻る</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

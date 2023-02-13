@@ -1,0 +1,92 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 申し込まれた依頼{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .superform2{
+      position: relative;
+      top: 10px;
+      left: 600px;
+      width: 130px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+    .mes{
+      position: relative;
+      top: -50%;
+      left: 55%;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      width: 200px;
+      word-wrap: break-word;
+    }
+    .iraininn{
+      position: relative;
+      top: -50%;
+      left: 55%;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+      width: 200px;
+      word-wrap: break-word;
+    }
+    .superimg{
+      position: relative;
+      top: 35px;
+      left: 35%;
+    }
+    .irai{
+      position: relative;
+      top: -80px;
+      left: 620px;
+      width: 50px;
+      background-color: rgb(0,206,209);
+      padding: 1px;
+    }
+    .noirai{
+      position: relative;
+      top: -105px;
+      left: 710px;
+      width: 50px;
+      background-color: rgb(0,206,209);
+      padding: 0.5px;
+    }
+    .ul{
+      height: 300px;
+      width: 73.5%;
+      overflow-y: scroll;
+    }
+    .notext{
+      position: absolute;
+      left: 630px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+        <a href="{% url 'skillswap:request-received' %}"><button class="superform2">申し込まれた依頼</button></a>
+        <a href="{% url 'skillswap:management-list' %}"><button class="superform2">運営からのお知らせ</button></a>
+        <ul class="ul">
+            {% for request in request_list %}
+            {% if request.user_id.skillseat.user_img %}
+            <li><a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}"><img src="{{ request.user_id.skillseat.user_img.url }}" class="superimg" width="120" height="120"/></a></li>
+            {% else %}
+            <li><a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}"><img src="{% static 'assets/sample.png' %}" class="superimg" width="120" height="120"/></a></li>
+            {% endif %}
+            <li class="iraininn">送信者：<a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}">{{ request.user_id.skillseat.user_name }}</a></li>
+            <li class="mes">メッセージ：{{ request.message }}</li>
+            <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button class="irai">承認</button></a></li>
+            <li><a href="{% url 'skillswap:request-rejection' request.pk %}"><button class="noirai">拒否</button></a></li>
+            {% empty %}
+            <p class="notext">申請された依頼はありません</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

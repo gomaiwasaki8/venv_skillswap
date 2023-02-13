@@ -1,0 +1,47 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'others_profile.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 相手のプロフィール{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}
+<style>
+    .menu1{
+      color: blue;
+    }
+    .btn{
+      position: absolute;
+      top: 60%;
+      left: 10%;
+      /*width:80px;*/
+      width:100px;
+      height:35px;
+      background:rgb(0,206,209);
+      border-radius:35px;
+      cursor : pointer;
+      font-family: cursive, 'Noto Sans JP', sans-serif;
+    }
+    .other-text{
+      width: 450px;
+      word-wrap: break-word;
+    }
+    .other-text{
+      position: absolute;
+      top: 350px;
+      left: 500px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="daily">
+        <p class="other-text">{{ skillseat.profile_text }}</p>
+        <a href="{{request.META.HTTP_REFERER}}"><button class="btn">戻る</button></a>
+    </div>
+</div>
+{% endblock %}

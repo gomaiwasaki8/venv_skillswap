@@ -1,0 +1,56 @@
+<!-- 作成者：岩崎・古越 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | お問い合わせ一覧{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div>
+            <h1>管理者</h1>
+
+            <a href="{% url 'skillswap:user-list' %}"><button>登録ユーザ情報一覧</button></a>
+            <a href="{% url 'skillswap:news-list' %}"><button>運営からのお知らせ一覧</button></a>
+
+            <form action="{% url 'skillswap:inquiry-list' %}" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="すべて">
+            <input type="submit" value="返信済み" name="replied">
+            <input type="submit" value="未返信" name="no-reply">
+            </form>
+
+            {% for object in object_list %}
+            <table border="1">
+                <tr>
+                    <td>名前</td><td>{{ object.user_name }}</td>
+                </tr>
+                <tr>
+                    <td>メールアドレス</td><td>{{ object.email }}</td>
+                </tr>
+                <tr>
+                    <td>お問い合わせ内容</td><td>{{ object.inquiry_content }}</td>
+                </tr>
+                <tr>
+                    {% if object.replied == None %}
+                    <td>未返信</td>
+                    <td><a href="{% url 'skillswap:inquiry-replied' object.pk %}"><button>返信済みにする</button></a></td>
+                    {% else %}
+                    <td>返信済み</td>
+                    <td><a href="{% url 'skillswap:inquiry-unreplied' object.pk %}"><button>未返信にする</button></a></td>
+                    {% endif %}
+                </tr>
+            </table>
+            <br>
+                {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

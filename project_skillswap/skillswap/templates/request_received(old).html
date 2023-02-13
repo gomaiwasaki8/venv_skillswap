@@ -1,0 +1,35 @@
+<!-- 作成者：岩崎・古越・藤谷 -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKILLSWAP | 申し込まれた依頼{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+        <a href="{% url 'skillswap:request-received' %}"><button>申し込まれた依頼一覧</button></a>
+        <a href="{% url 'skillswap:management-list' %}"><button>運営からのお知らせ</button></a>
+        <ul>
+            {% for request in request_list %}
+            {% if request.user_id.skillseat.user_img %}
+            <li><a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}"><img src="{{ request.user_id.skillseat.user_img.url }}" class="superimg" width="200" height="200"/></a></li>
+            {% else %}
+            <li><a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}"><img src="{% static 'assets/sample.png' %}" class="superimg" width="200" height="200"/></a></li>
+            {% endif %}
+            <li>送信者：<a href="{% url 'skillswap:others-profile-skillseat' request.user_id.skillseat.user_id_id %}">{{ request.user_id.skillseat.user_name }}</a></li>
+            <li>メッセージ：{{ request.message }}</li>
+            <li><a href="{% url 'skillswap:addfriend' request.user_id_id %}"><button>承認</button></a></li>
+            <li><a href="{% url 'skillswap:request-rejection' request.pk %}"><button>拒否</button></a></li>
+            {% empty %}
+            <p>申請された依頼はありません</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
