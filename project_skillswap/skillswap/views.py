@@ -771,7 +771,7 @@ class ReviewCompletedView(LoginRequiredMixin, generic.TemplateView):
 
 # 管理者ログイン後トップページ
 class AdministratorView(LoginRequiredMixin, generic.TemplateView):
-    template_name = "Administrator.html"
+    template_name = "administrator.html"
 
 
 # 管理者側からユーザの一覧閲覧
